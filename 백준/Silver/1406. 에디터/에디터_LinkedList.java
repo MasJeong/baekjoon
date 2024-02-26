@@ -6,10 +6,7 @@ import java.util.ListIterator;
 import java.util.StringTokenizer;
 
 /**
- * 에디터 - 자료구조 TODO 다시 풀기
- * 1. stack을 이용하여 push 시 pointer + 1에 값이 있으면 뒤로 1칸씩 옮긴다.
- * - pop 시 pointer부터 size -1까지 앞으로 옮긴다.
- * -> 시간초과.
+ * 에디터 - 자료구조
  */
 public class Main {
     private static final LinkedList<Character> linkedList= new LinkedList<>();
