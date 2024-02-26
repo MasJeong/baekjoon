@@ -18,31 +18,6 @@ public class Main {
 
         String s = br.readLine();
 
-        // 괄호 없는 경우
-        if (!s.contains("<")) {
-            st = new StringTokenizer(s);
-            int cnt = st.countTokens();
-            while (st.hasMoreTokens()) {
-                String token = st.nextToken();
-
-                for (int i = 0; i < token.length(); i++) {
-                    firstStack.push(token.charAt(i));
-                }
-
-                for (int i = 0; i < token.length(); i++) {
-                    sb.append(firstStack.pop());
-                }
-
-                if (--cnt > 0) {
-                    sb.append(" ");
-                }
-            }
-
-            System.out.println(sb);
-            br.close();
-            return;
-        }
-
         // 처음 여는 꺽새(<)가 나오기 전에 push 되지 않아 애를 먹었다.
 //        boolean isClose = false;
         boolean isClose = true;
