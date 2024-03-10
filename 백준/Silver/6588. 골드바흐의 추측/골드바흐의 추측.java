@@ -30,11 +30,11 @@ public class Main {
         }
 
         // 소수이고 홀수만 들어있는 배열 세팅
-        for (int i = 3; i < MAX_LENGTH; i++) {
-            if (!prime[i] && i % 2 == 1) {
-                answer[i] = i;
-            }
-        }
+//        for (int i = 3; i < MAX_LENGTH; i++) {
+//            if (!prime[i] && i % 2 == 1) {
+//                answer[i] = i;
+//            }
+//        }
 
         while (n != 0) {
             boolean isPass = false;
@@ -42,15 +42,23 @@ public class Main {
             int start = 2;
 
             // a 구하기
-            for (int i = start; i <= n; i++) {
-                if(answer[i] != 0) {
-                    a = answer[i];
+//            for (int i = start; i <= n; i++) {
+//                if(answer[i] != 0) {
+//                    a = answer[i];
+//
+//                    // n - a가 홀수이고 n - a가 소수인 경우
+//                    if ((n - a) % 2 == 1 && answer[n-a] != 0) {
+//                        isPass = true;
+//                        break;
+//                    }
+//                }
+//            }
 
-                    // n - a가 홀수이고 n - a가 소수인 경우
-                    if ((n - a) % 2 == 1 && answer[n-a] != 0) {
-                        isPass = true;
-                        break;
-                    }
+            for (int i = 3; i <= n; i++) {
+                if(!prime[i] && !prime[n - i]) {
+                    sb.append(n).append(" = ").append(i).append(" + ").append(n - i).append("\n");
+                    isPass = true;
+                    break;
                 }
             }
 
@@ -58,8 +66,6 @@ public class Main {
                 System.out.println("Goldbach's conjecture is wrong.");
                 continue;
             }
-
-            sb.append(n).append(" = ").append(a).append(" + ").append(n - a).append("\n");
 
             n = Integer.parseInt(br.readLine());
         }
