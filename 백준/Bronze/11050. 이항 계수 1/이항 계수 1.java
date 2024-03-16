@@ -8,6 +8,12 @@ import java.util.StringTokenizer;
  */
 public class Main {
 
+    private static int fibonacci(int num) {
+        if (num == 0) return 1;
+
+        return num * fibonacci(num - 1);
+    }
+
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -16,15 +22,8 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
 
-        int a = 1;
-        int b = 1;
-        int c = 1;
-
-        for (int i = 2; i <= n; i++) a *= i;
-        for (int i = 2; i <= n - k; i++) b *= i;
-        for (int i = 2; i <= k; i++) c *= i;
-
-        System.out.println(a / (b * c));
+        // nCr = n! / (n - r)! * r!
+        System.out.println(fibonacci(n) / (fibonacci(n - k) * fibonacci(k)));
         br.close();
     }
 
