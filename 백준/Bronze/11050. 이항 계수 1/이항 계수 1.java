@@ -5,25 +5,34 @@ import java.util.StringTokenizer;
 
 /**
  * 이항 계수1 - 수학(조합론)
+ * Binomial Coefficient
  */
 public class Main {
 
-    private static int fibonacci(int num) {
-        if (num == 0) return 1;
+    private static Integer[][] dp;
 
-        return num * fibonacci(num - 1);
+    private static int binomial(int n, int k) {
+        if (n == k || k == 0) {
+            return dp[n][k] = 1;
+        }
+
+        if (dp[n][k] == null) {
+            dp[n][k] = binomial(n - 1, k - 1) + binomial(n - 1, k);
+        }
+
+        return dp[n][k];
     }
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        StringBuilder sb = new StringBuilder();
 
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
 
-        // nCr = n! / (n - r)! * r!
-        System.out.println(fibonacci(n) / (fibonacci(n - k) * fibonacci(k)));
+        dp = new Integer[n + 1][k + 1];
+
+        System.out.println(binomial(n, k));
         br.close();
     }
 
