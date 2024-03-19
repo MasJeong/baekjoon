@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
@@ -10,18 +9,23 @@ import java.util.StringTokenizer;
 public class Main {
 
     private static long binarySearch(int[] arr, int n) {
-        long left = 0;
+        long left = 0L;
         // 가장 큰 수를 기준으로 이분탐색 진행
-        long right = arr[arr.length - 1];
-        long result = 1;
+//        long right = arr[arr.length - 1];
+        long right = Integer.MAX_VALUE;
+        long result = 1L;
 
-        while (left <= right && (left + right > 1)) {
+        /*
+        left + right > 1 조건: mid가 0이 되면 안된다.
+         */
+        while (left <= right && left + right > 1) {
             // int의 경우 left와 right 둘 다 2^31-1인 경우 오버플로우가 발생한다.
             long mid = (left + right) >>> 1;
             int cntLine = 0;
 
-            // mid가 0이 되는 경우가 존재한다.
-            for (int i : arr) cntLine += (int) (i / mid);
+            for (int i : arr) {
+                cntLine += (int) (i / mid);
+            }
 
             if (cntLine < n) {
                 right = mid - 1;
@@ -46,7 +50,7 @@ public class Main {
             arr[i] = Integer.parseInt(br.readLine());
         }
 
-        Arrays.sort(arr);
+//        Arrays.sort(arr);
 
         long answer = binarySearch(arr, n);
 
