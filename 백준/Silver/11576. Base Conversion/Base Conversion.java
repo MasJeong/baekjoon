@@ -13,6 +13,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
+        Stack<Integer> stack = new Stack<>();
 
         int a = Integer.parseInt(st.nextToken());
         int b = Integer.parseInt(st.nextToken());
@@ -36,23 +37,17 @@ public class Main {
         }
 
         // b진수로 변환
-//        while (ten >= b) {
-//            sb.append(ten % b).append(" ");
-//            ten /= b;
-//        }
-//        sb.append(ten);
-//
-//        System.out.println(sb.reverse());
-        Stack<Integer> stack = new Stack<>();
-
-        //10진법 -> B진법
-        while (ten != 0) {
+        while (ten > 0) {
             stack.push(ten % b);
             ten /= b;
         }
 
-        while (!stack.isEmpty())
-            System.out.print(stack.pop() + " ");
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop()).append(" ");
+        }
+        
+        System.out.println(sb);
+
         br.close();
     }
 }
