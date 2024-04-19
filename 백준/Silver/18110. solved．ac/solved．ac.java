@@ -24,7 +24,7 @@ public class Main {
             sum += arrDifficulty[i];
         }
 
-        int result = Math.round((float) sum / (arrDifficulty.length - avgCount - avgCount));
+        int result = Math.round((float) sum / (arrDifficulty.length - (avgCount * 2)));
 
         System.out.println(result);
         br.close();
