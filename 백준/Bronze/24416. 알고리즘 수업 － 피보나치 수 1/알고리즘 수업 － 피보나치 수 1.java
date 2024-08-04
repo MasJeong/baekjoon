@@ -2,6 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * 알고리즘 수업 - 피보나치 수 1 - DP
+ */
 public class Main {
 
     private static int recurCount = 0;
@@ -24,7 +27,10 @@ public class Main {
         dp[1] = dp[2] = 1;
 
         for (int i = 3; i <= n; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2];
+            if (dp[i] == null) {
+                dp[i] = dp[i - 1] + dp[i - 2];
+            }
+            
             dpCount++;
         }
     }
