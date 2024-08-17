@@ -1,20 +1,22 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.StringTokenizer;
 
+/**
+ * 집합 - 비트마스크
+ * 향상된 switch는 jdk14부터 적용됨
+ */
 public class Main {
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         StringBuilder sb = new StringBuilder();
-        final int SET_SIZE = 20;
 
+        // 공집합
+        int set = 0;
         int m = Integer.parseInt(br.readLine());
-        Map<Integer, Integer> S = new HashMap<>();
 
         while (m-- > 0) {
             st = new StringTokenizer(br.readLine());
@@ -27,40 +29,24 @@ public class Main {
 
             switch (oper) {
                 case "add":
-                    if (!S.containsKey(x)) {
-                        S.put(x, x);
-                    }
+                    // x가 3인 경우, 0b1000 (2^3)
+                    set |= 1 << x;
                     break;
                 case "remove":
-                    S.remove(x);
+                    // x가 3인 경우, 0b0000 &= 0b0111 => 0b0000
+                    set &= ~(1 << x);
                     break;
                 case "check":
-                    if (S.containsKey(x)) {
-                        sb.append(1);
-                    } else {
-                        sb.append(0);
-                    }
-
-//                    System.out.println(x + "\n");
-                    sb.append("\n");
+                    sb.append((set & 1 << x) != 0 ? 1 : 0).append("\n");
                     break;
                 case "toggle":
-                    if (S.containsKey(x)) {
-                        S.remove(x);
-                    } else {
-                        S.put(x, x);
-                    }
+                    set ^= (1 << x);
                     break;
                 case "all":
-                    S.clear();
-
-                    // 1 ~ 20 삽입
-                    for (int i = 0; i < SET_SIZE; i++) {
-                        S.put(i + 1, i + 1);
-                    }
+                    set = (1 << 21) - 1;
                     break;
                 case "empty":
-                    S.clear();
+                    set = 0;
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + oper);
